@@ -70,8 +70,8 @@ func main() {
 
 	test.PushBack(1)
 	test.PushBack(2)
-	if test.Len() == 3 {
-		fmt.Println("Длина списка равна 3")
+	if test.Len() == 2 {
+		fmt.Println("Длина списка равна 2")
 	}
 
 	countT := 2
@@ -81,8 +81,8 @@ func main() {
 	}
 
 	err = test.Remove(node)
-	if err == nil && test.Len() == countT {
-		fmt.Println(" Узел 2 удален, новая длина 2")
+	if err == nil && test.Len() == countT-1 {
+		fmt.Println(" Узел 2 удален, новая длина 1")
 	}
 	test.PushBack(3)
 	fmt.Print("Текущий список: ")
@@ -152,6 +152,9 @@ func (d *DoublyList) PushFront(val int) {
 }
 
 func (d *DoublyList) Remove(node *Node) error {
+	if node == nil {
+		return ErrNilNode
+	}
 	if d.len == 0 || d.head == nil {
 		return ErrEmptyList
 	}
